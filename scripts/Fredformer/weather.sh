@@ -1,3 +1,4 @@
+export CUDA_VISIBLE_DEVICES=0,1,2,3
 if [ ! -d "./logs" ]; then
     mkdir ./logs
 fi
@@ -17,7 +18,7 @@ model_id_name=weather
 data_name=custom
 
 random_seed=2021
-for pred_len in 96 192 #336 720
+for pred_len in 192 336 720
 do
     case $pred_len in
         96)  cf_dim=32 cf_depth=3 cf_heads=8 cf_mlp=32 cf_head_dim=8 d_model=8;;
@@ -50,7 +51,8 @@ do
       --des 'Exp' \
       --train_epochs 100\
       --patience 5\
-      --itr 1 --batch_size 128 --learning_rate $rate >logs/LongForecasting/$model_name'_'$model_id_name'_'$seq_len'_'$pred_len.log\
+      --itr 1 --batch_size 128 \
+      --learning_rate $rate \
       --gpu 0 \
       --cf_dim $cf_dim \
       --cf_depth $cf_depth \

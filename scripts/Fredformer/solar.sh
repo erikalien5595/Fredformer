@@ -1,3 +1,4 @@
+export CUDA_VISIBLE_DEVICES=0,1,2,3
 if [ ! -d "./logs" ]; then
     mkdir ./logs
 fi
@@ -8,8 +9,8 @@ fi
 seq_len=96
 model_name=Fredformer
 
-root_path_name=./dataset/
-data_path_name=Solar.csv
+root_path_name=./dataset/Solar/
+data_path_name=solar_AL.txt
 model_id_name=Solar
 data_name=Solar
 
@@ -46,8 +47,8 @@ do
       --patience 5\
       --lradj 'TST'\
       --pct_start 0.2\
-      --itr 1 --batch_size 32 --learning_rate 0.01 >logs/LongForecasting/$model_name'_'$model_id_name'_'$seq_len'_'$pred_len.log \
-      --gpu 0 \
+      --itr 1 --batch_size 32 --learning_rate 0.01 \
+      --gpu 2 \
       --cf_dim $cf_dim \
       --cf_depth $cf_depth \
       --cf_heads $cf_heads \

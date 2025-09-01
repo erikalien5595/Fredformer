@@ -7,12 +7,12 @@ import numpy as np
 
 num_gpus = torch.cuda.device_count()
 
-if num_gpus >= 3:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
-elif num_gpus >= 2:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
-else:
-    os.environ["CUDA_VISIBLE_DEVICES"] = "0"  
+# if num_gpus >= 3:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2"
+# elif num_gpus >= 2:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = "0,1"
+# else:
+#     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 parser = argparse.ArgumentParser(description='Autoformer & Transformer family for Time Series Forecasting')
 
 #Fredformer:

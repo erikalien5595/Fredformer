@@ -1,3 +1,5 @@
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+gpu=0
 if [ ! -d "./logs" ]; then
     mkdir ./logs
 fi
@@ -10,14 +12,14 @@ rate=0.0001
 seq_len=96
 model_name=Fredformer
 
-root_path_name=./dataset/
+root_path_name=./dataset/ETT-small/
 data_path_name=ETTh1.csv
 model_id_name=ETTh1
 data_name=ETTh1
 
 
 random_seed=2021
-for pred_len in 192 336 96 720 
+for pred_len in 96 192 336 720
 do
     case $pred_len in
         96)  cf_dim=128 cf_depth=2 cf_heads=8 cf_mlp=96 cf_head_dim=32 d_model=24;;
@@ -47,7 +49,7 @@ do
       --train_epochs 100\
       --patience 10\
       --itr 1 --batch_size 128 --learning_rate $rate >logs/LongForecasting/$model_name'_'$model_id_name'_'$seq_len'_'$pred_len.log\
-      --gpu 0 \
+      --gpu $gpu \
       --cf_dim $cf_dim \
       --cf_depth $cf_depth \
       --cf_heads $cf_heads \
@@ -57,7 +59,7 @@ do
       --individual 0
 done
 
-root_path_name=./dataset/
+root_path_name=./dataset/ETT-small/
 data_path_name=ETTh2.csv
 model_id_name=ETTh2
 data_name=ETTh2
@@ -97,7 +99,7 @@ do
       --des 'Exp' \
       --train_epochs 100\
       --itr 1 --batch_size 128 --learning_rate $rate >logs/LongForecasting/$model_name'_'$model_id_name'_'$seq_len'_'$pred_len.log \
-      --gpu 0 \
+      --gpu $gpu \
       --cf_dim $cf_dim \
       --cf_depth $cf_depth \
       --cf_heads $cf_heads \
@@ -107,7 +109,7 @@ do
       --individual 0
 done
 
-root_path_name=./dataset/
+root_path_name=./dataset/ETT-small/
 data_path_name=ETTm1.csv
 model_id_name=ETTm1
 data_name=ETTm1
@@ -149,7 +151,7 @@ do
       --lradj 'TST'\
       --pct_start 0.4\
       --itr 1 --batch_size 128 --learning_rate $rate >logs/LongForecasting/$model_name'_'$model_id_name'_'$seq_len'_'$pred_len.log \
-      --gpu 0 \
+      --gpu $gpu \
       --cf_dim $cf_dim \
       --cf_depth $cf_depth \
       --cf_heads $cf_heads \
@@ -159,7 +161,7 @@ do
       --individual 0
 done
 
-root_path_name=./dataset/
+root_path_name=./dataset/ETT-small/
 data_path_name=ETTm2.csv
 model_id_name=ETTm2
 data_name=ETTm2
@@ -201,7 +203,7 @@ do
       --lradj 'TST'\
       --pct_start 0.4 \
       --itr 1 --batch_size 128 --learning_rate $rate >logs/LongForecasting/$model_name'_'$model_id_name'_'$seq_len'_'$pred_len.log  \
-      --gpu 0 \
+      --gpu $gpu \
       --cf_dim $cf_dim \
       --cf_depth $cf_depth \
       --cf_heads $cf_heads \
