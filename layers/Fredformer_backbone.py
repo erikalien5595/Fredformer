@@ -79,9 +79,9 @@ class Fredformer_backbone(nn.Module):
         z1 = z1.unfold(dimension=-1, size=self.patch_len, step=self.stride)                         # z1: [bs x nvars x patch_num x patch_len]
         z2 = z2.unfold(dimension=-1, size=self.patch_len, step=self.stride)                         # z2: [bs x nvars x patch_num x patch_len]                                                                 
 
-        #for channel-wise_1
-        z1 = z1.permute(0,2,1,3)
-        z2 = z2.permute(0,2,1,3)
+        # #for channel-wise_1
+        # z1 = z1.permute(0,2,1,3)
+        # z2 = z2.permute(0,2,1,3)
 
 
         # model shape
@@ -103,8 +103,8 @@ class Fredformer_backbone(nn.Module):
         z2 = torch.reshape(z2, (batch_size,patch_num,c_in,z2.shape[-1]))
         
 
-        z1 = z1.permute(0,2,1,3)                                                                    # z1: [bs, nvars， patch_num, horizon]
-        z2 = z2.permute(0,2,1,3)
+        # z1 = z1.permute(0,2,1,3)                                                                    # z1: [bs, nvars， patch_num, horizon]
+        # z2 = z2.permute(0,2,1,3)
 
         z1 = self.head_f1(z1)                                                                    # z: [bs x nvars x target_window] 
         z2 = self.head_f2(z2)                                                                    # z: [bs x nvars x target_window]

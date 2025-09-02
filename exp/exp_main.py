@@ -41,6 +41,9 @@ class Exp_Main(Exp_Basic):
     
     def __init__(self, args):
         super(Exp_Main, self).__init__(args)
+        num_params = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
+        print(f"Model {args.model} - Total parameters: {num_params}")
+        print(f"="*40)
 
     def _build_model(self):
         model_dict = {
